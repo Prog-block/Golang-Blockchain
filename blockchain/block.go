@@ -5,9 +5,9 @@ import (
 	"encoding/gob"
 	"log"
 )
-// bitcoin and other currencies use levelDB as there database, it is a key value based database, we will use badger DB (native database for golang) it is also key value based like levelDB // byte keys byte values, putting them into files
-// badger db only accepts array/slices of bytes
-// therefore we need function to cerealize and decerealize the Block struct to bytes // we will make it Block.go
+  
+  
+  
 type Block struct {
 	Hash     []byte
 	Data     []byte
@@ -30,22 +30,22 @@ func Genesis() *Block {
 	return CreateBlock("Genesis", []byte{})
 }
 
-func (b *Block) Serialize() []byte { // method on the BlockStruct, outputs a slice of bytes(bytes representation of our block)
+func (b *Block) Serialize() []byte {   
 	var res bytes.Buffer
-	encoder := gob.NewEncoder(&res) // encoder on our results bytes buffer
+	encoder := gob.NewEncoder(&res)   
 
-	err := encoder.Encode(b) // calling encode on the block itself
+	err := encoder.Encode(b)   
 
 	Handle(err)
 
-	return res.Bytes() // returning bytes portion of results
+	return res.Bytes()   
 }
 
 func Deserialize(data []byte) *Block {
 	var block Block
 
 	decoder := gob.NewDecoder(bytes.NewReader(data))
-	// bytes.NewReader(data) creates bytes reader which gets passed to NewDecoder
+	  
 	err := decoder.Decode(&block)
 
 	Handle(err)
