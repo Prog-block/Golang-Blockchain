@@ -10,7 +10,7 @@ import (
 // bitcoin has two types of data:
 // blocks stored with metadata & chain state object
 
-// in Bitcoin each block has a seprate file on the disk, this done to increase performance // we wont need to open multiple files just to read one block
+// in Bitcoin each block has a seprate file on the disk, this is done to increase performance // we wont need to open multiple files just to read one block
 
 const (
 	dbPath = "./tmp/blocks" // path to our database
@@ -39,7 +39,7 @@ func InitBlockChain() *BlockChain {
 
 	err = db.Update(func(txn *badger.Txn) error { // update allows to read and write transaction on database //closure is pointer to a badger transaction
 		//func(txn *badger.Txn) == closer// closer takes in  pointer to a badger transaction and passes back an error
-		if _, err := txn.Get([]byte("lh")); err == badger.ErrKeyNotFound { // if true-> database does not exist -> blockchain does not exist // lh is key -> last hash; if err == badger.ErrKeyNotFound is true than this will work
+		if _, err := txn.Get([]byte("lh")); err == badger.ErrKeyNotFound { // if err = true-> database does not exist -> blockchain does not exist // lh is key -> last hash; if err == badger.ErrKeyNotFound is true than this will work // []byte("lh") -> bytes representation of lh
 			fmt.Println("No existing blockchain found")
 			genesis := Genesis() // creating genesis block
 			fmt.Println("Genesis proved")
