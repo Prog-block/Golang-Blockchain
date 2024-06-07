@@ -11,7 +11,7 @@ type Block struct {
 	Nonce    int
 }
 
-func CreateBlock(data string, prevHash []byte) *Block {
+func CreateBlock(data string, prevHash []byte) *Block { // 
 	block := &Block{[]byte{}, []byte(data), prevHash, 0} // 0 for initial nonce
 	pow := NewProof(block)
 	nonce, hash := pow.Run()

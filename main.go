@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	chain := blockchain.InitBlockChain()
+	chain := blockchain.InitBlockChain() // refrencing the import here
 
 	chain.AddBlock("First Block after Genesis")
 	chain.AddBlock("Second Block after Genesis")
@@ -20,7 +20,7 @@ func main() {
 		fmt.Printf("Hash: %x\n", block.Hash)
 
 		pow := blockchain.NewProof(block)
-		fmt.Printf("PoW: %s\n", strconv.FormatBool(pow.Validate())) // printing validation
+		fmt.Printf("PoW: %s\n", strconv.FormatBool(pow.Validate())) // converting validation boolian into string format
 		fmt.Println()
 
 	}
